@@ -6,7 +6,7 @@ import java.net.Socket;
 
 
 class SimpleServer {
-
+//readme
   public static void main(String[] args) throws IOException {
     ServerSocket ding;
     Socket dong = null;

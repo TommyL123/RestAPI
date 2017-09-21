@@ -47,9 +47,9 @@ class SimpleServer {
 
                     } else if (line.contains("/posts")) {
                         Gson gson = new Gson();
-                        User[] users = gson.fromJson(new FileReader("./posts.json"), User[].class);
+                        Posts[] post = gson.fromJson(new FileReader("./posts.json"), Posts[].class);
 
-                        Posts post = new Posts("user", "hey");
+                        Posts posts = new Posts("user", "hey");
 
                     } else if (line.contains("/posts?userid")) {
 

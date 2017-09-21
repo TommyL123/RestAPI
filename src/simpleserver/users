@@ -1,0 +1,60 @@
+{
+  "users":[
+    {
+      "username" : "rey",
+      "userid" : 0,
+      "myKey" : "myValue"
+    },
+    {
+      "username" : "lukeSkywalker",
+      "userid" : 1
+    },
+    {
+      "username" : "daenerysStormborn",
+      "userid" : 2
+    },
+    {
+      "username" : "khalDrogo",
+      "userid" : 3
+    }
+  ],
+  "posts":[
+    {
+      "postid":0,
+      "userid": 1,
+      "data": "I lost my lightsaber, anyone seen it?"
+    },
+    {
+      "postid":1,
+      "userid": 0,
+      "data": "Found lightsaber, looking for owner"
+    },
+    {
+      "postid":3,
+      "userid": 1,
+      "data": "Guess How many dragons I have"
+    }
+  ],
+  "comments":[
+    {
+      "postid":0,
+      "userid": 1,
+      "data": "I think I found it!"
+    },
+    {
+      "postid":0,
+      "userid": 0,
+      "data": "Wow thanks, maybe you can be a Jedi now!"
+    },
+    {
+      "postid":2,
+      "userid": 0,
+      "data": "None?"
+    },
+    {
+      "postid":2,
+      "userid": 3,
+      "data": "8?"
+    }
+  ]
+}

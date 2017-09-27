@@ -1,6 +1,7 @@
 package simpleserver;
 
 import com.google.gson.Gson;
+import javafx.geometry.Pos;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -39,35 +40,65 @@ class SimpleServer {
 
                     if (line.contains("/user")) {
                         Gson gson = new Gson();
-                        User[] users = gson.fromJson(new FileReader("./users.json"), User[].class); //move to top
+                        JsonData data = gson.fromJson(new FileReader("./datafile.json"), JsonData.class); //move to top
 
                         Timestamp time = new Timestamp(System.currentTimeMillis());
-                        Response response = new Response("ok", time.toString(), users.length, users);
+                        ResponseUsers response = new ResponseUsers("ok", time.toString(), data.user.length, data.user);
                         responseString = gson.toJson(response);
-
                     } else if (line.contains("/posts")) {
                         Gson gson = new Gson();
-                        Posts[] post = gson.fromJson(new FileReader("./posts.json"), Posts[].class);
+                        JsonData data = gson.fromJson(new FileReader("./datafile.json"), JsonData.class);
 
-                        Posts posts = new Posts("user", "hey");
+                        Timestamp time = new Timestamp(System.currentTimeMillis());
+                        ResponsePosts response = new ResponsePosts("ok", time.toString(), data.posts.length, data.posts);
+                        responseString = gson.toJson(response);
 
                     } else if (line.contains("/posts?userid")) {
+                        Gson gson = new Gson();
+                        JsonData data = gson.fromJson(new FileReader("./datafile.json"), JsonData.class);
+
+                        int index = line.indexOf("=");
+                        String userid = line.substring(index+1, line.length()-1);
+                        int useridInt = Integer.parseInt(userid);
+
+                        Posts[] posts = data.posts;
+                        Posts[] newPosts = new Posts[posts.length];
+                        int count = 0;
+                        for(int i= 0; i<posts.length; i++){
+                            if(useridInt == posts[i].userid){
+                                newPosts[count] = posts[i];
+                                count++;
+                            }
+
+                        }
+                        Timestamp time = new Timestamp(System.currentTimeMillis());
+                        ResponsePosts response = new ResponsePosts("ok", time.toString(), newPosts.length, newPosts);
+                        responseString = gson.toJson(response);
 
                     } else if (line.contains("/comments")) {
+                        Gson gson = new Gson();
+                        JsonData data = gson.fromJson(new FileReader("./datafile.json"), JsonData.class);
+
+                        int index = line.indexOf("=");
+                        String postid = line.substring(index+1, line.length()-1);
+                        int postidInt = Integer.parseInt(postid);
+
+                        Posts[] posts = data.posts;
+                        Posts[] comments = new Posts[posts.length];
+                        int count = 0;
+                        for(int i= 0; i<posts.length; i++) {
+                            if (postidInt == posts[i].postid) {
+                                comments[count] = posts[i];
+                                count++;
+                            }
+                        }
+                        Timestamp time = new Timestamp(System.currentTimeMillis());
+                        ResponsePosts response = new ResponsePosts("ok", time.toString(), comments.length, comments);
+                        responseString = gson.toJson(response);
 
                     }
-//          System.out.println(line);
-//          // read only headers
-//          line = in.readLine();
-//          while (line != null && line.trim().length() > 0) {
-//            int index = line.indexOf(": ");
-//            if (index > 0) {
-//              System.out.println(line);
-//            } else {
-//              break;
-//            }
-//            line = in.readLine();
-//                }
+
+//
                 System.out.println("----------REQUEST END---------\n\n");
             } catch(IOException e){
                 System.out.println("Error reading");

@@ -1,15 +1,15 @@
 package simpleserver;
 
-public class Response {
+public class ResponsePosts {
     String status;
     String timeStamp;
     int entries;
-    User[] users;
+    Posts[] posts;
 
-    public Response(String status, String timeStamp, int entries, User[] users){
+    public ResponsePosts(String status, String timeStamp, int entries, Posts[] posts){
         this.status = status;
         this.timeStamp = timeStamp;
         this.entries = entries;
-        this.users = users;
+        this.posts = posts;
     }
 }

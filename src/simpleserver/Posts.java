@@ -1,12 +1,13 @@
 package simpleserver;
 
 public class Posts {
-    String userId;
-    String post;
+    int postid;
+    int userid;
+    String data;
 
-    public Posts(String userId, String post) {
-        this.userId = userId;
-        this.post = post;
-
+    public Posts(int postid, int userid) {
+        this.postid = postid;
+        this.userid = userid;
+        this.data = data;
     }
 }
